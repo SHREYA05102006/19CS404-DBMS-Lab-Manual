@@ -22,122 +22,103 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 - Payments tracked for memberships and sessions.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_fitness.png)
+<img width="1267" height="779" alt="Screenshot 2025-09-26 110421" src="https://github.com/user-attachments/assets/11b751d9-78c2-41aa-9165-624228f283ec" />
 
-### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+## Entities and Attributes
 
-### Relationships and Constraints
+#### 1.MEMBER-
+member_id (Primary Key)
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+name
 
-### Assumptions
-- 
-- 
-- 
+membershiptype
 
----
+startdate
 
-# Scenario B: City Library Event & Book Lending System
+#### 2.PROGRAM-
 
-**Business Context:**  
-The Central Library wants to manage book lending and cultural events.
+programID (Primary Key)
 
-**Requirements:**  
-- Members borrow books, with loan and return dates tracked.  
-- Each book has title, author, and category.  
-- Library organizes events; members can register.  
-- Each event has one or more speakers/authors.  
-- Rooms are booked for events and study.  
-- Overdue fines apply for late returns.
+programname
 
-### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_library.png)
+description
 
-### Entities and Attributes
+schedule
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+#### 3.TRAINER-
 
-### Relationships and Constraints
+trainerID (Primary Key)
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+name
 
-### Assumptions
-- 
-- 
-- 
+specialisation
 
----
+experience
 
-# Scenario C: Restaurant Table Reservation & Ordering
+#### 4.PAYMENT-
 
-**Business Context:**  
-A popular restaurant wants to manage reservations, orders, and billing.
+paymentID (Primary Key)
 
-**Requirements:**  
-- Customers can reserve tables or walk in.  
-- Each reservation includes date, time, and number of guests.  
-- Customers place food orders linked to reservations.  
-- Each order contains multiple dishes; dishes belong to categories (starter, main, dessert).  
-- Bills generated per reservation, including food and service charges.  
-- Waiters assigned to serve reservations.
+amount
 
-### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_restaurant.png)
+paymentdate
 
-### Entities and Attributes
+paymenttype
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+#### 5.SESSION-
 
-### Relationships and Constraints
+sessionID (Primary Key)
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+date
 
-### Assumptions
-- 
-- 
-- 
+time
 
----
+type
 
-## Instructions for Students
+#### 6.ATTENDENCE (Attendance)-
 
-1. Complete **all three scenarios** (A, B, C).  
-2. Identify entities, relationships, and attributes for each.  
-3. Draw ER diagrams using **draw.io / diagrams.net** or hand-drawn & scanned.  
-4. Fill in all tables and assumptions for each scenario.  
-5. Export the completed Markdown (with diagrams) as **a single PDF**
+attendence_id (Primary Key)
+
+status (values: present / absent)
+
+## Relationships and Constraints
+MEMBER — pays → PAYMENT
+One member can make many payments. Each payment belongs to one member.
+(1-to-Many)
+
+MEMBER — Enrollment → PROGRAM
+A member can enroll in multiple programs. A program can have many members.
+(Many-to-Many)
+
+PROGRAM — teaches → TRAINER
+A trainer can teach multiple programs. A program can be taught by one or more trainers.
+(Many-to-Many)
+
+MEMBER — attends → SESSION
+A member can attend many sessions. A session can be attended by many members.
+(Many-to-Many)
+
+SESSION — has → ATTENDENCE
+A session can have many attendance records. Each attendance record belongs to a session.
+(1-to-Many)
+
+## Assumptions
+Each member must have a valid membership (with start date and type).
+
+A program may be taught by more than one trainer.
+
+Enrollment is required before a member can attend sessions of a program.
+
+Payments are linked directly to members, not to programs or sessions.
+
+Attendance is tracked per session per member.
+
+Status in attendance is limited to "present" or "absent".
+
+A trainer may teach multiple programs but must have at least one specialization.
+
+A member can attend multiple sessions but must be enrolled in at least one program.
+
+## Result
+Hence,the concepts of ER diagram is understood and applied by creating an ER diagram for a real world application.
